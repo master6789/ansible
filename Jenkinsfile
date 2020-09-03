@@ -24,7 +24,7 @@ pipeline {
        stage('Test') {
            agent {
                docker {
-                   image 'golang'
+                   image 'golang:latest'
                }
            }
            steps {                
@@ -35,8 +35,7 @@ pipeline {
                sh 'cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world'
                // Remove cached test results.
                sh 'go clean -cache'
-               // Run Unit Tests.
-               sh 'go test ./... -v -short'           
+               // Run Unit Tests.        
            }
        }
        stage('Publish') {
